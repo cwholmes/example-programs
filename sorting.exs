@@ -70,16 +70,18 @@ defmodule Sorting do
 
   # end
 
-  def test(module, timed \\ false) do
-    f = if timed do
+  defmodule Config,  do: defstruct timed: false, count: 30, loops: 30
+
+  def test(module, config \\ %Config{}) do
+    f = if config.timed do
       fn unsorted -> measure(fn -> module.sort(unsorted) end) end
     else
       fn unsorted -> module.sort(unsorted) end
     end
-    for _ <- 0..30, do: validate(f.(random_list()))
+    for _ <- 0..config.loops, do: validate(f.(random_list(config)))
   end
 
-  defp random_list(), do: for _ <- 0..30, do: :rand.uniform(50)
+  defp random_list(config), do: for _ <- 0..config.count, do: :rand.uniform(150)
 
   defp validate([]) do
     true
