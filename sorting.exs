@@ -43,7 +43,7 @@ defmodule Sorting do
     defp do_sort([]), do: []
 
     defp do_sort(unsorted) do
-      pivot = List.last(unsorted)
+      {unsorted, pivot} = List.pop_at(unsorted, -1)
       {lower, higher, same} = do_sort(unsorted, pivot)
       do_sort(lower) ++ [pivot | same] ++ do_sort(higher)
     end
