@@ -1,8 +1,6 @@
 import scala.collection.immutable.Queue
 
-trait Node
-
-class BfsTraverser(start: Node, f: Node => Queue[Node]) {
+class BfsTraverser[Node](start: Node, f: Node => Queue[Node]) {
   
   def traverse(): Stream[Node] = {
     def go(q: Queue[Node], visited: Set[Node]): Stream[Node] = {
@@ -17,7 +15,7 @@ class BfsTraverser(start: Node, f: Node => Queue[Node]) {
   }
 }
 
-class DfsTraverser(start: Node, f: Node => List[Node]) {
+class DfsTraverser[Node](start: Node, f: Node => List[Node]) {
 
   def traverse(): Stream[Node] = {
     def go(stack: List[Node], visited: Set[Node]): Stream[Node] = {
