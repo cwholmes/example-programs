@@ -4,7 +4,7 @@ import scala.collection.immutable.Queue
 
 class BfsTraverser[Node](start: Node, f: Node => Queue[Node]) {
   
-  def traverse(): Stream[Node] = {
+  def traverse(): LazyList[Node] = {
     def go(q: Queue[Node], visited: Set[Node]): LazyList[Node] = {
       if (q.isEmpty) LazyList()
       else {
@@ -20,7 +20,7 @@ class BfsTraverser[Node](start: Node, f: Node => Queue[Node]) {
 
 class DfsTraverser[Node](start: Node, f: Node => List[Node]) {
 
-  def traverse(): Stream[Node] = {
+  def traverse(): LazyList[Node] = {
     def go(stack: List[Node], visited: Set[Node]): LazyList[Node] = {
       if (q.isEmpty) LazyList()
       else {
