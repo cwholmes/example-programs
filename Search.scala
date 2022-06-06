@@ -22,9 +22,9 @@ class DfsTraverser[Node](start: Node, f: Node => List[Node]) {
 
   def traverse(): LazyList[Node] = {
     def go(stack: List[Node], visited: Set[Node]): LazyList[Node] = {
-      if (q.isEmpty) LazyList()
+      if (stack.isEmpty) LazyList()
       else {
-        stack.foldLeft(Stream()) { (stream, node) =>
+        stack.foldLeft(LazyList[Node]()) { (stream, node) =>
           // the stream will iterate through all possible paths for this node then move to the next
           // TODO: Should this be able to track visited through all nodes or just this path to avoid a loop
           stream ++ (node #:: go(f(node), visited + node))
